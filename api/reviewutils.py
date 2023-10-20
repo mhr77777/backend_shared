@@ -3,13 +3,14 @@ from flask import Blueprint, jsonify  # jsonify creates an endpoint response obj
 from flask_restful import Api, Resource # used for REST API building
 import requests  # used for testing 
 import time
+import supabase
 
 # Blueprints enable python code to be organized in multiple files and directories https://flask.palletsprojects.com/en/2.2.x/blueprints/
-covid_api = Blueprint('covid_api', __name__,
-                   url_prefix='/api/covid')
+review_api = Blueprint('review_api', __name__,
+                   url_prefix='/api/reviews')
 
 # API generator https://flask-restful.readthedocs.io/en/latest/api.html#id1
-api = Api(covid_api)
+api = Api(review_api)
 
 """Time Keeper
 Returns:
@@ -27,7 +28,7 @@ def updateTime():
     
     # calculate time since last update
     elapsed = time.time() - last_run
-    if elapsed > 86400:  # update every 24 hours
+    if elapsed > 240:  # update every 2 minutes
         last_run = time.time()
         return True
     
@@ -37,28 +38,22 @@ def updateTime():
 Returns:
     String: API response
 """   
-def getCovidAPI():
-    global covid_data  # the covid_data global is preserved between calls to function
-    try: covid_data
-    except: covid_data = None
+def getReviewAPI():
+    global review_data  # the review_data global is preserved between calls to function
+    try: review_data
+    except: review_data = None
 
     """
     Preserve Service usage / speed time with a Reasonable refresh delay
     """
-    if updateTime(): # request Covid data
-        """
-        RapidAPI is the world's largest API Marketplace. 
-        Developers use Rapid API to discover and connect to thousands of APIs. 
-        """
-        url = "https://corona-virus-world-and-india-data.p.rapidapi.com/api"
-        headers = {
-            'x-rapidapi-key': "dec069b877msh0d9d0827664078cp1a18fajsn2afac35ae063",
-            'x-rapidapi-host': "corona-virus-world-and-india-data.p.rapidapi.com"
-        }
-        response = requests.request("GET", url, headers=headers)
-        covid_data = response
+    if updateTime():
+        
+        #ADD CODE TO FETCH DATA!
+        
+
+        review_data = response
     else:  # Request Covid Data
-        response = covid_data
+        response = review_data
 
     return response
 
@@ -69,7 +64,7 @@ Returns:
 """   
 def getCountry(filter):
     # Request Covid Data
-    response = getCovidAPI()
+    response = getReviewAPI()
     # Look for Country    
     countries = response.json().get('countries_stat')
     for country in countries:  # countries is a list
@@ -86,7 +81,7 @@ class CovidAPI:
     """API Method to GET all Covid Data"""
     class _Read(Resource):
         def get(self):
-            return getCovidAPI().json()
+            return getReviewAPI().json()
         
     """API Method to GET Covid Data for a Specific Country"""
     class _ReadCountry(Resource):
@@ -110,7 +105,7 @@ if __name__ == "__main__":
     print("-"*30) # cosmetic separator
 
     # This code looks for "world data"
-    response = getCovidAPI()
+    response = getReviewAPI()
     print("World Totals")
     world = response.json().get('world_total')  # turn response to json() so we can extract "world_total"
     for key, value in world.items():  # this finds key, value pairs in country
