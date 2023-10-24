@@ -7,13 +7,15 @@ import math
 #MONIKA CODED THIS FILE BTW!!
 app = Flask(__name__)
 uTime = 0.0
-apidata = {}
 
 #Hopefully this is more secure than the old code lol
 sbkey = open(".dbkeys").read().split("=")[1]
 supabase: Client = create_client("https://jcvfukpccvibxumakqdh.supabase.co",sbkey)
 def UpdateAPI():
-    pass #TODO: Make this function retrieve and process books from the database.
+    books = supabase.table("books").select("*").json()
+    return books
+
+apidata = UpdateAPI()
 
 # GET endpoint to retrieve all books
 @app.route('/api/books', methods=['GET'])
