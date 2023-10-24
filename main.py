@@ -11,7 +11,7 @@ from model.players import initPlayers
 
 
 # setup APIs
-from api.reviewutils import review_api # Blueprint import api definition
+from api.books import review_api # Blueprint import api definition
 
 
 # setup App pages
