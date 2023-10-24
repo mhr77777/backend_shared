@@ -3,6 +3,8 @@ import time
 from supabase import Client, create_client
 import math
 
+
+#MONIKA CODED THIS FILE BTW!!
 app = Flask(__name__)
 uTime = 0.0
 apidata = {}
