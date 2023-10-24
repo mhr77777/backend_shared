@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import time
-from supabase import Client, create_client
 import math
+import json
 
 
 #MONIKA CODED THIS FILE BTW!!
@@ -10,10 +10,8 @@ uTime = 0.0
 
 #Hopefully this is more secure than the old code lol
 sbkey = open(".dbkeys").read().split("=")[1]
-supabase: Client = create_client("https://jcvfukpccvibxumakqdh.supabase.co",sbkey)
 def UpdateAPI():
-    books = supabase.table("books").select("*").json()
-    return books
+    pass #I'll do this later ffs
 
 apidata = UpdateAPI()
 
