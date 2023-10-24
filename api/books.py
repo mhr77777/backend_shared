@@ -13,7 +13,7 @@ API Update Function
 
 supabase: Client = create_client("","")
 def UpdateAPI():
-    pass
+    pass #TODO: Make this function retrieve and process books from the database.
 
 # GET endpoint to retrieve all books
 @app.route('/api/books', methods=['GET'])
