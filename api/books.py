@@ -7,11 +7,8 @@ app = Flask(__name__)
 uTime = 0.0
 apidata = {}
 
-"""
-API Update Function
-"""
-
-supabase: Client = create_client("","")
+# Please for the love of god let my database policies be good enough for this to be safe 
+supabase: Client = create_client("https://jcvfukpccvibxumakqdh.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjdmZ1a3BjY3ZpYnh1bWFrcWRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc4MzQ0NTgsImV4cCI6MjAxMzQxMDQ1OH0.WGYEozwhqtUDvrSbvyFivxRDN7pit9YJTvmhNW83-oc")
 def UpdateAPI():
     pass #TODO: Make this function retrieve and process books from the database.
 
