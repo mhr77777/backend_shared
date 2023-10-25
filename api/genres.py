@@ -1,27 +1,30 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Blueprint
 import time
 import math
 import json
+import requests
+import asyncio
+import threading
+from flask_limiter import Limiter
 
+apibooks = Blueprint("books",__name__,url_prefix='/api/books')
 
-#MONIKA CODED THIS FILE BTW!!
 app = Flask(__name__)
-uTime = 0.0
-
+uTime = float(time.time() + 30.0)
+apidata = {}
 #Hopefully this is more secure than the old code lol
 sbkey = open(".dbkeys").read().split("=")[1]
 def UpdateAPI():
-    pass #I'll do this later ffs
-
-apidata = UpdateAPI()
-
-# GET endpoint to retrieve all books
-@app.route('/api/books', methods=['GET'])
+    booksdat = requests.get("https://jcvfukpccvibxumakqdh.supabase.co/rest/v1/books?select=*",headers={"apikey":sbkey,"Authorization":"Bearer "+sbkey})
+    booksdat = booksdat.json()
+    return booksdat
+@apibooks.route('/', methods=['GET'])
 def get_items():
+    apidata = UpdateAPI()
     return jsonify(apidata)
 
 # GET endpoint to retrieve a specific item by ID
-@app.route('/api/books/item_id=<int:item_id>', methods=['GET'])
+@apibooks.route('/item_id=<int:item_id>', methods=['GET'])
 def get_item(item_id):
     item = next((item for item in apidata if item["id"] == item_id), None)
     if item is None:
