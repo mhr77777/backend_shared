@@ -5,7 +5,6 @@ import json
 import requests
 import asyncio
 import threading
-from flask_limiter import Limiter
 
 apibooks = Blueprint("books",__name__,url_prefix='/api/books')
 
