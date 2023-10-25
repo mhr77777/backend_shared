@@ -13,7 +13,7 @@ import threading
 
 # setup APIs
 import api.books as books # Blueprint import api definition
-
+import api.genres as genres
 
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
@@ -24,6 +24,7 @@ db.init_app(app)
 
 # register URIs
 app.register_blueprint(books.apibooks)
+app.register_blueprint(genres.apigenres)
 app.register_blueprint(app_projects) # register app pages
 
 @app.errorhandler(404)  # catch for URL not found
