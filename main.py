@@ -8,10 +8,11 @@ from __init__ import app,db  # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.players import initPlayers
-
+import asyncio
+import threading
 
 # setup APIs
-from api.books import review_api # Blueprint import api definition
+import api.books as books # Blueprint import api definition
 
 
 # setup App pages
@@ -22,7 +23,7 @@ from projects.projects import app_projects # Blueprint directory import projects
 db.init_app(app)
 
 # register URIs
-app.register_blueprint(review_api) # register api routes
+app.register_blueprint(books.apibooks)
 app.register_blueprint(app_projects) # register app pages
 
 @app.errorhandler(404)  # catch for URL not found
@@ -44,6 +45,7 @@ def activate_job():  # activate these items
     initUsers()
     initPlayers()
 
+#threading.Thread(target=books.UpdateLoop()).start()
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
