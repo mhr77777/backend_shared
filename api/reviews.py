@@ -6,7 +6,7 @@ import requests
 import asyncio
 import threading
 
-apigenres = Blueprint("genres",__name__,url_prefix='/api/genres')
+apireviews = Blueprint("reviews",__name__,url_prefix='/api/reviews')
 
 app = Flask(__name__)
 uTime = float(time.time() + 30.0)
@@ -14,16 +14,16 @@ apidata = {}
 #Hopefully this is more secure than the old code lol
 sbkey = open(".dbkeys").read().split("=")[1]
 def UpdateAPI():
-    reviewsdat = requests.get("https://jcvfukpccvibxumakqdh.supabase.co/rest/v1/genres?select=*",headers={"apikey":sbkey,"Authorization":"Bearer "+sbkey})
+    reviewsdat = requests.get("https://jcvfukpccvibxumakqdh.supabase.co/rest/v1/reviews?select=*",headers={"apikey":sbkey,"Authorization":"Bearer "+sbkey})
     reviewsdat = reviewsdat.json()
-    return genresdat
-@apigenres.route('/', methods=['GET'])
+    return reviewsdat
+@apireviews.route('/', methods=['GET'])
 def get_items():
     apidata = UpdateAPI()
     return jsonify(apidata)
 
 # GET endpoint to retrieve a specific item by ID
-@apigenres.route('/item_id=<int:item_id>', methods=['GET'])
+@apireviews.route('/item_id=<int:item_id>', methods=['GET'])
 def get_item(item_id):
     item = next((item for item in apidata if item["id"] == item_id), None)
     if item is None:

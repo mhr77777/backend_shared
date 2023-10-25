@@ -25,8 +25,8 @@ db.init_app(app)
 
 # register URIs
 app.register_blueprint(books.apibooks)
-app.register_blueprint(genres.apigenres
-app.register_blueprint(reviews.apireviews))
+app.register_blueprint(genres.apigenres)
+app.register_blueprint(reviews.apireviews)
 app.register_blueprint(app_projects) # register app pages
 
 @app.errorhandler(404)  # catch for URL not found
