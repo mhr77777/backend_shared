@@ -27,6 +27,7 @@ def get_items():
 # GET endpoint to retrieve a specific item by ID
 @apibooks.route('/item_id=<int:item_id>', methods=['GET'])
 def get_item(item_id):
+    apidata = UpdateAPI()
     item = next((item for item in apidata if item["id"] == item_id), None)
     if item is None:
         return jsonify({"error": "Item not found"}), 404
