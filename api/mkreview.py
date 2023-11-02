@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, Blueprint, request
+from flask import Flask, jsonify, Blueprint, Request
 import time
 import math
 import json
@@ -30,7 +30,7 @@ def getLatestID():
 @apireview.route('/', methods=['POST'])
 def post_review():
 
-    reqdat = request.json()
+    reqdat = Request.json()
     try:
         rvat = requests.post("https://jcvfukpccvibxumakqdh.supabase.co/rest/v1/reviews",
                   headers={
