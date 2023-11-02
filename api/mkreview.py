@@ -27,7 +27,7 @@ def getLatestID():
     lid = get_largest_integer(arr_ids)
     return str(lid)
 
-@apireview.route('/', methods=['GET'])
+@apireview.route('/', methods=['POST'])
 def post_review():
 
     reqdat = request.json()
