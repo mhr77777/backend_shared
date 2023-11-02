@@ -46,5 +46,5 @@ def post_review():
                      "book_id":int(reqdat.get("book_id"))
                   }))
         return str(rvat.status_code)
-    except:
-       return str(418)
+    except Exception as e:
+       return str("418: "+str(e))
