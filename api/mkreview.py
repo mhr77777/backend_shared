@@ -41,9 +41,9 @@ def post_review():
                   },
                   data=json.dumps({
                      "id":int(getLatestID())+1,
-                     "reviewer_name": str(reqdat.get("reviewer_name")),
+                     #"reviewer_name": str(reqdat.get("reviewer_name")),
                      "stars":int(reqdat.get("stars")),
-                     "commentary":str(reqdat.get("commentary")),
+                     #"commentary":str(reqdat.get("commentary")),
                      "book_id":int(reqdat.get("book_id"))
                   }))
         return str(rvat.status_code)
