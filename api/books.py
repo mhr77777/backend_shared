@@ -5,6 +5,9 @@ import json
 import requests
 import asyncio
 import threading
+import sbkeys
+
+sbkey = sbkeys.sbkey
 
 apibooks = Blueprint("books",__name__,url_prefix='/api/books')
 
@@ -14,7 +17,6 @@ app = Flask(__name__)
 uTime = float(time.time() + 30.0)
 apidata = {}
 #Hopefully this is more secure than the old code lol
-sbkey = open(".dbkeys").read().split("=")[1]
 def UpdateAPI():
     booksdat = requests.get("https://jcvfukpccvibxumakqdh.supabase.co/rest/v1/books?select=*",headers={"apikey":sbkey,"Authorization":"Bearer "+sbkey})
     booksdat = booksdat.json()
