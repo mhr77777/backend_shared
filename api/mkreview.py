@@ -29,7 +29,6 @@ def getLatestID():
 
 @apireview.route('/', methods=['POST'])
 def post_review():
-
     reqdat = request.get_json()
     try:
         rvat = requests.post("https://jcvfukpccvibxumakqdh.supabase.co/rest/v1/reviews",
@@ -41,9 +40,9 @@ def post_review():
                   },
                   data=json.dumps({
                      "id":int(getLatestID())+1,
-                     #"reviewer_name": str(reqdat.get("reviewer_name")),
+                     "reviewer_name": str("Jane D."),
                      "stars":int(reqdat.get("stars")),
-                     #"commentary":str(reqdat.get("commentary")),
+                     "commentary":str("Lorem ipsum dolor sit amet"),
                      "book_id":int(reqdat.get("book_id"))
                   }))
         return str(rvat.status_code)
